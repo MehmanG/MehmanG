@@ -78,21 +78,11 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
 
           {/* Bottom Decorative Expanding Accent Line */}
           <motion.div 
-            className="h-[1px] bg-gradient-to-r from-transparent via-theme-accent to-transparent w-40 md:w-56 mt-6 mb-4"
+            className="h-[1px] bg-gradient-to-r from-transparent via-theme-accent to-transparent w-40 md:w-56 mt-6"
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 0.8 }}
             transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
           />
-
-          {/* Luxury Subtitle with wide letter-spacing */}
-          <motion.div
-            className="flex items-center justify-center uppercase text-theme-text/45 font-display text-[9px] md:text-[11px] tracking-[0.5em] mt-2 whitespace-nowrap"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.7 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            Sanctuary &amp; Hotel
-          </motion.div>
         </div>
 
         {/* Minimalist Premium Loading Bar Indicator */}
