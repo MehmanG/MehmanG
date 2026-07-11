@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import Logo from './Logo';
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -48,46 +47,68 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       animate={{ y: isLoaded ? '-100%' : 0 }}
       transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
     >
-      <div className="flex flex-col items-center justify-center">
-        {/* Logo container as a Rounded Edge Square with a subtle luxurious glow */}
-        <div className="relative flex items-center justify-center">
-          {/* Golden Rotating Halo Ring */}
-          <motion.div
-            className="absolute w-36 h-36 border border-theme-accent/30 border-t-theme-accent border-r-theme-accent rounded-full opacity-60"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+      {/* Decorative background glow ambient effect */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_50%,rgba(255,184,0,0.06),transparent_100%)] pointer-events-none" />
+
+      <div className="flex flex-col items-center justify-center px-4 relative z-10 select-none">
+        {/* Typographic Header */}
+        <div className="relative py-8 px-12 flex flex-col items-center">
+          {/* Subtle glowing backdrop behind text */}
+          <div className="absolute inset-0 bg-theme-accent/5 rounded-[40px] blur-3xl opacity-85" />
+
+          {/* Top Decorative Expanding Accent Line */}
+          <motion.div 
+            className="h-[1px] bg-gradient-to-r from-transparent via-theme-accent to-transparent w-40 md:w-56 mb-6"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 0.8 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
           />
 
-          <motion.div 
-            className="w-28 h-28 bg-theme-surface border border-theme-text/10 rounded-2xl flex items-center justify-center shadow-[0_0_35px_rgba(255,184,0,0.3)] relative overflow-hidden z-10"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.1, type: 'spring' }}
+          {/* Main Brand Title with spacing, glowing drop shadow, and staggered motion */}
+          <motion.div
+            className="flex flex-col items-center gap-1 text-center"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {/* Ambient inner gold glow */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-theme-accent/5 via-transparent to-theme-accent/10 pointer-events-none" />
-            
-            {/* Render Logo logomark without text */}
-            <Logo size="md" showText={false} />
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-light tracking-[0.25em] text-theme-heading leading-none">
+              MEHMAN <span className="font-semibold text-theme-accent drop-shadow-[0_0_20px_rgba(255,184,0,0.4)]">G</span>
+            </h1>
+          </motion.div>
+
+          {/* Bottom Decorative Expanding Accent Line */}
+          <motion.div 
+            className="h-[1px] bg-gradient-to-r from-transparent via-theme-accent to-transparent w-40 md:w-56 mt-6 mb-4"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 0.8 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+          />
+
+          {/* Luxury Subtitle with wide letter-spacing */}
+          <motion.div
+            className="flex items-center justify-center uppercase text-theme-text/45 font-display text-[9px] md:text-[11px] tracking-[0.5em] mt-2 whitespace-nowrap"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.7 }}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
+            Sanctuary &amp; Hotel
           </motion.div>
         </div>
 
-        {/* Elegant typography below the glowing logo badge */}
-        <motion.div 
-          className="mt-8 flex flex-col items-center"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <h1 className="text-3xl font-display font-bold tracking-wider text-theme-heading">
-            Mehman <span className="text-theme-accent">G</span>
-          </h1>
-          <div className="flex items-center justify-center w-full uppercase text-theme-text/40 font-display font-medium text-[10px] tracking-[0.45em] mt-2">
-            <span className="h-[1px] w-5 bg-theme-text/10 mr-2 inline-block"></span>
-            Hotel
-            <span className="h-[1px] w-5 bg-theme-text/10 ml-2 inline-block"></span>
-          </div>
-        </motion.div>
+        {/* Minimalist Premium Loading Bar Indicator */}
+        <div className="w-24 md:w-32 h-[2px] bg-theme-text/10 rounded-full overflow-hidden mt-6 relative">
+          <motion.div 
+            className="h-full bg-gradient-to-r from-theme-accent/70 via-theme-accent to-theme-accent/70 rounded-full"
+            initial={{ left: "-100%" }}
+            animate={{ left: "100%" }}
+            transition={{ 
+              duration: 1.6, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            style={{ position: 'absolute', width: '60%' }}
+          />
+        </div>
       </div>
     </motion.div>
   );
